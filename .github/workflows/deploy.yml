@@ -41,7 +41,8 @@ jobs:
         with:
           host: ${{ secrets.ALIYUN_HOST }}
           username: ${{ secrets.ALIYUN_USER }}
-          key: ${{ secrets.ALIYUN_SSH_KEY }}
+          #key: ${{ secrets.ALIYUN_SSH_KEY }}
+          password: ${{ secrets.ALIYUN_PASSWORD }}
           port: 22
           source: "docker-compose.yml"
           target: "/data/services/beany-fastapi-async/"
