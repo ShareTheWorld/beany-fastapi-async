@@ -1,137 +1,122 @@
-# **Beany · FastAPI Demo**
+# **Beany · FastAPI Demo** ![Stars](https://img.shields.io/github/stars/ShareTheWorld/beany-fastapi-async?style=flat-square) ![Forks](https://img.shields.io/github/forks/ShareTheWorld/beany-fastapi-async?style=flat-square) ![Issues](https://img.shields.io/github/issues/ShareTheWorld/beany-fastapi-async?style=flat-square)
 
-一个现代化、结构清晰、可扩展的 **FastAPI 后端工程模板**。
+一个现代化、结构清晰、**可扩展的 FastAPI 后端工程模板**。
 开箱即用 **用户登录、验证码发送、PostgreSQL、异步 ORM、全局异常处理、依赖注入** 等核心能力。
 
-> 🎯 目标：成为开发者快速构建生产级 FastAPI 后端的优选模板
-> ⭐ 欢迎 Star / Fork，一起完善生态！
+> 🎯 目标：帮助开发者快速搭建生产级 FastAPI 后端
+> ⭐ Star / Fork 一起完善生态！
 
 ---
 
-## ✨ **特点亮点**
+## ✨ **核心亮点**
 
-### 🚀 1. 100% 异步架构
+### 🚀 100% 异步架构
 
-基于 **FastAPI + SQLModel + AsyncSession + PostgreSQL**
-支持高并发 & 异步 I/O，性能出色。
+* **FastAPI + SQLModel + AsyncSession + PostgreSQL**
+* 支持高并发 & 异步 I/O，性能卓越
 
-### 🏗 2. 企业级项目结构
+### 🏗 企业级项目结构
 
-清晰分层：`router / service / dao / model / common / store / util`
-便于团队协作与后期扩展。
+* 清晰分层：`router / service / dao / model / common / store / util`
+* 团队协作与扩展无压力
 
-### 🔐 3. 开箱即用权限体系
+### 🔐 开箱即用权限体系
 
-* JWT 鉴权
-* OAuth2 token 流程
+* JWT 鉴权 + OAuth2 token 流程
 * 用户登录 / 自动注册
 * 验证码登录（邮箱 / 手机）
 
-### 📡 4. 完整的验证码系统
+### 📡 完整验证码系统
 
 * 支持邮箱 / SMS
 * 发送记录入库
-* 验证码校验、过期处理
-* 基于 Jinja2 的 HTML 邮件模板
+* 校验、过期、重复使用防护
+* Jinja2 HTML 邮件模板渲染
 
-### 🧩 5. 稳健的全局异常处理
+### 🧩 稳健全局异常处理
 
-统一 ResponseModel
-支持业务错误、Pydantic 校验错误、全局异常。
+* 统一 ResponseModel
+* 业务错误、Pydantic 校验错误、全局异常统一处理
 
-### 🔧 6. 高可维护的 DAO 层
+### 🔧 高可维护 DAO 层
 
-通用 BaseDao：增删改查可复用
-每个 model 的 dao 只需增加少量业务方法即可。
+* 通用 BaseDao：增删改查可复用
+* 每个 model dao 只需少量业务方法
 
-### 📨 7. SMTP 邮件发送（异步）
+### 📨 SMTP 邮件发送（异步）
 
-aiosmtplib + Jinja2
-生产级可扩展能力。
+* aiosmtplib + Jinja2
+* 可扩展生产环境使用
 
 ---
 
-## 🏛️ **项目结构说明**
+## 🏛️ **项目结构概览**
+
+```mermaid
+graph TD
+A[FastAPI App] --> B[Router Layer]
+B --> C[Service Layer]
+C --> D[DAO Layer]
+D --> E[SQLModel / PostgreSQL]
+
+C --> F[Captcha Service] --> G[Email/SMS Provider]
+```
 
 ```
 beany-fastapi-async
-├── common                     # 全局工具：配置、异常、响应模型等
-│   ├── common.py
-│   ├── config.py
-│   └── deps.py                # 全局依赖注入（DB、用户）
-│
-├── dao                        # 数据访问层（数据库读写操作）
-│   ├── base_dao.py
-│   ├── user_dao.py
-│   └── captcha_dao.py
-│
-├── model                      # SQLModel 模型 / 请求体定义
-│   ├── user.py
-│   └── captcha.py
-│
-├── service                    # 业务逻辑层
-│   ├── user_service.py
-│   └── captcha_service.py
-│
-├── router                     # 路由模块
-│   ├── user.py
-│   ├── captcha.py
-│   └── __init__.py
-│
-├── store                      # 数据库连接、基础模型
-│   └── postgres.py
-│
-├── templates                  # Jinja2 邮件模板
-│
-├── util                       # 工具函数（token、验证码等）
-│   └── utils.py
-│
-├── main.py                    # 应用入口，注册路由、异常处理
-├── pyproject.toml             # 项目依赖（uv）
+├── common        # 配置、异常、依赖注入
+├── dao           # 数据访问层（BaseDao + 各模块Dao）
+├── model         # SQLModel 模型、请求体
+├── service       # 业务逻辑层
+├── router        # API 路由模块
+├── store         # 数据库连接、基础模型
+├── templates     # Jinja2 邮件模板
+├── util          # 工具函数（token、验证码等）
+├── main.py       # 应用入口
+├── pyproject.toml
 └── README.md
 ```
 
 ---
 
-## 🚀 **快速开始**
+## 🚀 **快速启动**
 
-### 1. 安装 uv（推荐）
+### 1️⃣ 安装 uv
 
 ```bash
 pip install uv
 ```
 
-### 2. 初始化项目
+### 2️⃣ 初始化项目
 
 ```bash
 uv sync
 ```
 
-### 3. 创建 `.env`
+### 3️⃣ 配置环境变量
 
-```
-重命名.env.example 为.env
+```bash
+cp .env.example .env
 ```
 
-### 4. 运行开发环境
+### 4️⃣ 启动开发环境
 
 ```bash
 uv run uvicorn main:app --reload
 ```
 
-启动后访问：
-
-➡ [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-自动生成的 API 文档（OpenAPI）
+* 访问自动生成 API 文档： [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 ---
 
-## 🧪 **内置 API 示例**
+## 🧪 **API 示例**
 
 ### 登录（验证码登录）
 
-```
+```http
 POST /api/user/login
+Content-Type: application/json
+
 {
   "account": "email@example.com",
   "code": "123456"
@@ -140,16 +125,18 @@ POST /api/user/login
 
 ### 发送验证码
 
-```
+```http
 POST /api/captcha/send_code
+Content-Type: application/json
+
 {
   "account": "email@example.com"
 }
 ```
 
-### 获取当前用户
+### 获取当前用户信息
 
-```
+```http
 GET /api/user/me
 Authorization: Bearer <token>
 ```
@@ -158,31 +145,32 @@ Authorization: Bearer <token>
 
 ## 🧬 **技术栈**
 
-| 技术         | 说明                             |
-|------------|--------------------------------|
-| FastAPI    | 高性能 Python Web 框架              |
-| SQLModel   | 结合 Pydantic + SQLAlchemy 的 ORM |
-| asyncpg    | PostgreSQL 异步驱动                |
-| aiosmtplib | 异步邮件发送                         |
-| Jinja2     | 邮件模板渲染                         |
-| PyJWT      | token 管理                       |
-| uv         | Python 项目与依赖管理                 |
+| 技术         | 说明                        |
+| ---------- | ------------------------- |
+| FastAPI    | 高性能 Python Web 框架         |
+| SQLModel   | Pydantic + SQLAlchemy ORM |
+| asyncpg    | PostgreSQL 异步驱动           |
+| aiosmtplib | 异步邮件发送                    |
+| Jinja2     | 邮件模板渲染                    |
+| PyJWT      | JWT Token 管理              |
+| uv         | Python 项目管理 & 命令工具        |
 
 ---
 
-## 🌱 **适合谁？**
+## 🌱 **适合人群**
 
-* 想快速搭建 **生产级 FastAPI 后端** 的开发者
-* 希望学习 **项目结构最佳实践**
-* 想构建登录/验证码系统的 Web / App 项目
+* 快速搭建 **生产级 FastAPI 后端** 的开发者
+* 学习 **项目结构最佳实践**
+* 构建登录 / 验证码系统的 Web / App 项目
 * 想要一个优雅、可扩展的 **开源模板**
 
 ---
 
 ## 🤝 **参与贡献**
 
-欢迎 Fork / PR，一起让模板更强大 👇👇👇
-**Star ⭐ 是对项目最大的支持！**
+* Fork / Star / PR 一起完善模板
+* 讨论和反馈请打开 GitHub Discussions
+* **Star ⭐ 是对项目最大的支持！**
 
 ---
 
