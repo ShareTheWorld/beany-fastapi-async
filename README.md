@@ -110,19 +110,7 @@ uv sync
 ### 3. 创建 `.env`
 
 ```
-APP_NAME=Beany
-SECRET_KEY=your-secret-key
-ROOT_PATH=/api
-
-DATABASE_URL=postgresql+asyncpg://user:password@localhost:5432/dbname
-
-SMTP_HOST=smtp.qq.com
-SMTP_EMAIL=xxx@qq.com
-SMTP_USER=Beany
-SMTP_PASSWORD=xxxx
-SMTP_SSL=True
-SMTP_TLS=False
-SMTP_PORT=465
+重命名.env.example 为.env
 ```
 
 ### 4. 运行开发环境
@@ -171,7 +159,7 @@ Authorization: Bearer <token>
 ## 🧬 **技术栈**
 
 | 技术         | 说明                             |
-| ---------- | ------------------------------ |
+|------------|--------------------------------|
 | FastAPI    | 高性能 Python Web 框架              |
 | SQLModel   | 结合 Pydantic + SQLAlchemy 的 ORM |
 | asyncpg    | PostgreSQL 异步驱动                |
