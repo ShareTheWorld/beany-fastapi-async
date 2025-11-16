@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app:
-    image: ghcr.io/sharetheworld/beany-fastapi-async:latest
+    image: ghcr.io/${{ github.repository_owner }}/beany-fastapi-async:latest
     container_name: beany-fastapi-async
     ports:
       - "8000:8000"

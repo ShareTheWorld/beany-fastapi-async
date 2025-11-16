@@ -30,7 +30,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/sharetheworld/beany-fastapi-async:latest
+            ghcr.io/${{ github.repository_owner }}/beany-fastapi-async:latest
 
       # 4️⃣ 上传 docker-compose.yml 到服务器
       - name: Upload docker-compose.yml to server
@@ -55,7 +55,7 @@ jobs:
             cd /data/services/beany-fastapi-async
 
             echo "Pulling latest image..."
-            docker pull ghcr.io/sharetheworld/beany-fastapi-async:latest
+            docker pull ghcr.io/${{ github.repository_owner }}/beany-fastapi-async:latest
 
             echo "Stopping old container if exists..."
             docker compose down || true
