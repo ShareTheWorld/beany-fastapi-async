@@ -1,0 +1,64 @@
+name: Beany Server
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. checkout代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. 登录 GitHub Container Registry（也可以换为阿里云 ACR）
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # 3. 构建并推送镜像到 GHCR
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/ShareTheWorld/beany-fastapi-async:latest
+
+      # 4. 把 docker-compose.yml 上传到服务器
+      - name: Copy docker-compose.yml to server
+        uses: appleboy/scp-action@v1.0.4
+        with:
+          host: ${{ secrets.ALIYUN_HOST }}
+          username: ${{ secrets.ALIYUN_USER }}
+          key: ${{ secrets.ALIYUN_SSH_KEY }}
+          source: "docker-compose.yml"
+          target: "/data/app/beany/"
+
+      # 5. SSH 登录服务器，拉取最新镜像并启动
+      - name: Deploy on Aliyun
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.ALIYUN_HOST }}
+          username: ${{ secrets.ALIYUN_USER }}
+          key: ${{ secrets.ALIYUN_SSH_KEY }}
+          script: |
+            cd /data/services/beany
+
+            echo "Pulling latest image..."
+            docker pull ghcr.io/ShareTheWorld/beany-fastapi-async:latest
+
+            echo "Stopping and removing old container..."
+            docker compose down || true
+
+            echo "Starting new container..."
+            docker compose up -d
+
+            echo "Deployment completed!"
