@@ -114,7 +114,7 @@ uv run uvicorn main:app --reload
 ### 登录（验证码登录）
 
 ```http
-POST /api/user/login
+POST /api/v1/user/login
 Content-Type: application/json
 
 {
@@ -126,7 +126,7 @@ Content-Type: application/json
 ### 发送验证码
 
 ```http
-POST /api/captcha/send_code
+POST /api/v1/captcha/send_code
 Content-Type: application/json
 
 {
@@ -137,7 +137,7 @@ Content-Type: application/json
 ### 获取当前用户信息
 
 ```http
-GET /api/user/me
+GET /api/v1/user/me
 Authorization: Bearer <token>
 ```
 
