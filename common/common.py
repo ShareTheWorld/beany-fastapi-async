@@ -5,6 +5,8 @@ from pydantic import BaseModel
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
+from common import logger
+
 
 class ResponseModel(BaseModel):
     code: int
@@ -38,6 +40,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     """
     捕获Pydantic校验错误（请求参数错误）
     """
+    logger.exception(f"Unhandled exception: {exc}")
     error = exc.errors()[0]  # 取第一个错误
     msg = error.get("msg")  # 直接取 msg
     return JSONResponse(status_code=200, content=ResponseModel.error(-1, msg), headers=headers)
@@ -47,6 +50,7 @@ async def biz_exception_handler(request: Request, exc: BizException):
     """
     处理自定义业务异常
     """
+    logger.exception(f"Unhandled exception: {exc}")
     return JSONResponse(status_code=200, content=ResponseModel.error(exc.code, exc.msg), headers=headers)
 
 
@@ -54,4 +58,5 @@ async def global_exception_handler(request: Request, exc: Exception):
     """
     处理全局异常
     """
+    logger.exception(f"Unhandled exception: {exc}")
     return JSONResponse(status_code=200, content=ResponseModel.error(-1, str(exc)), headers=headers)

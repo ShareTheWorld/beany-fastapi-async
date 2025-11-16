@@ -4,9 +4,9 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.routing import APIRoute
 from starlette.middleware.cors import CORSMiddleware
 
-from common.common import validation_exception_handler, global_exception_handler, BizException, biz_exception_handler
+from common import validation_exception_handler, global_exception_handler, BizException, biz_exception_handler
 from router import api_router
-from common.config import env
+from common import env
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:

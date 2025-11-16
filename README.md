@@ -203,5 +203,3 @@ Authorization: Bearer <token>
 MIT License
 
 ---
-
-如果你要我写英文版 README 或加上 badges（GitHub Action / Docker / Codecov / Screenshot），我也可以继续优化。

@@ -1,7 +1,8 @@
 from fastapi import APIRouter
 
-from common.common import ResponseModel
-from common.deps import UserDep, DbDep
+from common import ResponseModel
+from common import UserDep, DbDep
+from common import logger
 from model.user import LoginReq
 from service import user_service
 

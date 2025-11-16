@@ -6,7 +6,7 @@ from typing import Any
 
 import jwt
 
-from common.config import env
+from common import env
 
 
 def generate_captcha(length=6) -> str:

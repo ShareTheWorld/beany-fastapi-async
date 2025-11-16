@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, Request, Response, status, Depends
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from common.common import ResponseModel
-from common.deps import DbDep
+from common import ResponseModel
+from common import DbDep
 from model.captcha import CaptchaSendCodeReq
 from service import captcha_service
 from store.postgres import get_db

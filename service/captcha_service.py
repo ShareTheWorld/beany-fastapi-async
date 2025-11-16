@@ -7,8 +7,8 @@ import aiosmtplib
 from fastapi.logger import logger
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from common.config import env
-from common.deps import DbDep
+from common import env
+from common import DbDep
 
 from model.captcha import CaptchaSendCodeReq, Captcha, Channel, Scene, Status
 from util.utils import generate_captcha

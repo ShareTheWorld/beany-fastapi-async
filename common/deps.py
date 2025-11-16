@@ -5,7 +5,7 @@ from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from common.config import env
+from common import env
 from dao import user_dao
 from model.user import User
 from store.postgres import get_db

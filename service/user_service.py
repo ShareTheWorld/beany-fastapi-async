@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from common.deps import DbDep
+from common import DbDep
 from dao import user_dao
 from model.user import LoginReq, User
 from service import captcha_service

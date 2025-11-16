@@ -22,6 +22,8 @@ class Env(BaseSettings):
     CORS_ORIGINS: List[str] = ['*']
 
     # 日志
+    LOG_DIR: str = None
+    LOG_NAME: str = None
     LOG_LEVEL: str = None
 
     SMTP_HOST: str = None
@@ -31,6 +33,5 @@ class Env(BaseSettings):
     SMTP_TLS: bool = None
     SMTP_SSL: bool = None
     SMTP_PORT: int = None
-
 
 env = Env()
