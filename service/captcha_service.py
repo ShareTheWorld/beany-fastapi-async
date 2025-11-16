@@ -29,7 +29,7 @@ async def verify_account_captcha(db: AsyncSession, account: str, code: str) -> b
     captcha = await captcha_dao.get_by_account_and_code(db, account, code)
     assert captcha, "验证码错误"
     assert not captcha.used, "验证码已被使用"
-    await captcha_dao.update(db, captcha.id, used=True)
+    await captcha_dao.update(db, captcha.id, used=True, user_at=datetime.now())
     assert captcha.expire_at > datetime.now(), "验证码已过期"
     assert captcha.status == Status.sent, "未发送此验证码"
     return True
