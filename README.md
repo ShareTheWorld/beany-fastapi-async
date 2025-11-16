@@ -54,7 +54,7 @@ aiosmtplib + Jinja2
 ## 🏛️ **项目结构说明**
 
 ```
-beany-ai
+beany-fastapi-async
 ├── common                     # 全局工具：配置、异常、响应模型等
 │   ├── common.py
 │   ├── config.py
@@ -104,7 +104,7 @@ pip install uv
 ### 2. 初始化项目
 
 ```bash
-uv init beany-ai
+uv sync
 ```
 
 ### 3. 创建 `.env`
