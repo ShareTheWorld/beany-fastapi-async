@@ -6,6 +6,6 @@ services:
     container_name: beany-fastapi-async
     ports:
       - "8000:8000"
-    volumes:
-      - ./config:/app/config
+    env_file:
+      - /data/services/beany-fastapi-async/.env
     restart: always
