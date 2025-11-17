@@ -38,7 +38,7 @@ jobs:
       # 4️⃣ 上传 docker-compose.yml 到服务器
       #key: ${{ secrets.ALIYUN_SSH_KEY }}
       - name: Upload docker-compose.yml to server
-        uses: appleboy/scp-action@v0.1.12
+        uses: appleboy/scp-action@v0.1.6
         with:
           host: ${{ secrets.ALIYUN_HOST }}
           username: ${{ secrets.ALIYUN_USER }}

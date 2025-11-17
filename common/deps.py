@@ -15,7 +15,7 @@ reusable_oauth2 = OAuth2PasswordBearer(tokenUrl=f"{env.ROOT_PATH}/user/login")
 
 async def get_current_user(db=Depends(get_db), token: str = Depends(reusable_oauth2)) -> User:
     payload = jwt.decode(token, env.SECRET_KEY, algorithms=["HS256"])
-    user = await user_dao.get(db, payload['sub'])
+    user = await user_dao.get_by_id(db, payload['sub'])
     assert user, "User not found"
     return user
 
