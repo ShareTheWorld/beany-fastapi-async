@@ -7,8 +7,8 @@ create table "user"
     email     varchar(32)  default ''::character varying not null,
     phone     varchar(12)  default ''::character varying not null,
     avatar    varchar(255) default ''::character varying not null,
-    create_at timestamp    default now() not null,
-    update_at timestamp    default now() not null
+    created_at timestamp    default now() not null,
+    updated_at timestamp    default now() not null
 );
 
 comment
@@ -30,10 +30,10 @@ comment
 on column "user".avatar is '头像';
 
 comment
-on column "user".create_at is '创建时间';
+on column "user".created_at is '创建时间';
 
 comment
-on column "user".update_at is '更新时间';
+on column "user".updated_at is '更新时间';
 
 alter table "user"
     owner to postgres;
@@ -53,8 +53,8 @@ create table captcha
     used_at   timestamp,
     status    varchar(16)  default ''::character varying not null,
     remark    varchar(255) default ''::character varying not null,
-    create_at timestamp    default now() not null,
-    update_at timestamp    default now() not null
+    created_at timestamp    default now() not null,
+    updated_at timestamp    default now() not null
 );
 
 alter table captcha
@@ -77,8 +77,8 @@ create table captcha
     used_at   timestamp,
     status    varchar(16)  default ''::character varying not null,
     remark    varchar(255) default ''::character varying not null,
-    create_at timestamp    default now() not null,
-    update_at timestamp    default now() not null
+    created_at timestamp    default now() not null,
+    updated_at timestamp    default now() not null
 );
 
 comment
@@ -112,10 +112,10 @@ comment
 on column captcha.remark is '备注';
 
 comment
-on column captcha.create_at is '创建时间';
+on column captcha.created_at is '创建时间';
 
 comment
-on column captcha.update_at is '更新时间';
+on column captcha.updated_at is '更新时间';
 
 alter table captcha
     owner to postgres;
